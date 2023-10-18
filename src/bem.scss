@@ -1,0 +1,35 @@
+$namespace: 'xm' !default; // 命名空间，默认为 'xm'
+$block-sel: "-" !default; // 块选择器分隔符，默认为 "-"
+$elem-sel: "__" !default; // 元素选择器分隔符，默认为 "__"
+$mod-sel: "--" !default; // 修改器选择器分隔符，默认为 "--"
+
+@mixin bfc{
+  height: 100%;
+  overflow: hidden;
+}
+// 定义块级样式的混合
+@mixin b($block) {
+  $B: #{$namespace + $block-sel + $block}; // 构建块级选择器
+
+  .#{$B} {
+    @content; // 插入样式内容
+  }
+}
+
+@mixin e($el){
+  $selector:&;
+  @at-root {
+    #{$selector + $elem-sel + $el} {
+      @content;
+    }
+  }
+}
+// 定义修改器样式的混合
+@mixin m($m) {
+  $selector: &; // 存储当前选择器
+  @at-root {
+   #{$selector + $mod-sel + $m} {
+     @content;
+   }
+  }
+}
