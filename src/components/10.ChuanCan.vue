@@ -1,8 +1,8 @@
 <template>
     <div>子组件接收父组件传来的值:{{ title }}</div>
     <div>使用ts的方式定义 子组件接收父组件传来的值:{{ title }}</div>
-
-    <button @click="send">给父组件传值</button>
+    <br>
+    <!-- <button @click="send">给父组件传值</button> -->
 </template>
 
 <script setup lang='ts' name="ChuanCanData">
@@ -34,18 +34,24 @@ const props2 = withDefaults(defineProps<{
 })
 
 
-//给父组件传值
-const emit = defineEmits(['click']);
-const send = () => {
-    emit('click', "子组件给父组件传值")
-}
+// //给父组件传值
+// const emit = defineEmits(['click']);
+// const send = () => {
+//     emit('click', "子组件给父组件传值")
+// }
 //将值或者方法暴露给父组件
 const requestData = () => {
     console.log("将方法暴露给父组件");
 }
 defineExpose({
-    name:()=> "将属性值暴露给父组件",
-    // requestData
-});
+    a: "将属性值暴露给父组件",
+    requestData
+})
+//在父组件中这样接收  要在onMounted中接收  要把参数定义在外部
+// const ChuanCanDataref = ref() as any;
+// onMounted(() => {
+//     console.log(ChuanCanDataref.value.a);
+//     ChuanCanDataref.value.requestData();
+//   })
 </script>
 <style scoped></style>

@@ -1,18 +1,20 @@
 <template>
-  <ChuanCanData :title="userName" @click="getName" ref="ChuanCanDataref"></ChuanCanData>
+  <chaCaoData>
+    <template v-slot:header>
+      <div>
+        具名插槽 从父组件向子组件插入内容
+      </div>
+    </template>
+    <template v-slot:footer="{ data, index }">
+    {{ index }} --- {{ data.name }} 
+    </template>
+  </chaCaoData>
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
-import ChuanCanData from './components/10.ChuanCan.vue';
+import { ref, reactive, onMounted } from 'vue'
+import chaCaoData from './components/12.chaCao.vue';
 
-const userName = ref('通过v-bind来实现父子组件传参');
-const getName = (name: string) => {
-  console.log(name);
-}
-//使用子组件暴露给子组件的方法和值
-const ChuanCanDataref = ref<InstanceType<typeof ChuanCanData>>();
-console.log(ChuanCanDataref.value?.name);
-//  ChuanCanDataref.value?.requestData();
+
 </script>
 <style scoped></style>
